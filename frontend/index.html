@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knygų projektas</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <h1>Knygų projektas</h1>
+
+    <section class="form-section">
+      <h2>Rodyti konkrečią knygą pagal ID</h2>
+      <input
+        type="number"
+        id="book-id-input"
+        placeholder="Įveskite knygos ID"
+      />
+      <button id="show-book-btn">Rodyti knygą</button>
+      <button id="clear-btn">Išvalyti vieną knygą</button>
+      <div id="single-book" class="book-card"></div>
+    </section>
+
+    <section class="form-section">
+      <h2>Pridėti / Atnaujinti knygą</h2>
+      <input type="number" id="book-id" placeholder="ID" />
+      <input type="text" id="book-title" placeholder="Pavadinimas" />
+      <input type="text" id="book-author" placeholder="Autorius" />
+      <input type="text" id="book-image" placeholder="Nuotraukos URL" />
+      <button id="create-btn">Pridėti</button>
+      <button id="update-btn">Atnaujinti</button>
+    </section>
+
+    <section class="form-section">
+      <h2>Ištrinti knygą</h2>
+      <input type="number" id="delete-id" placeholder="Knygos ID" />
+      <button id="delete-btn">Ištrinti</button>
+    </section>
+    <section>
+      <h2>Visos knygos</h2>
+      <div id="books-container" class="book-grid"></div>
+    </section>
+  </body>
+</html>
