@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Knygu masyvas
+// Knygų masyvas
 let books = [
   {
     id: 1,
@@ -42,7 +42,7 @@ app.get('/books', (req, res) => {
 // [GET] - viena knyga pagal ID
 app.get('/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
-  const book = books.find((b) => b.id === bookId);
+  const book = books.find((book) => book.id === bookId);
 
   if (!book) {
     return res.status(404).json({ error: 'Knyga nerasta' });
@@ -75,7 +75,7 @@ app.put('/books/update/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const { title, author, image } = req.body;
 
-  const book = books.find((b) => b.id === bookId);
+  const book = books.find((book) => book.id === bookId);
 
   if (!book) {
     return res.status(404).json({ error: 'Knyga nerasta' });
@@ -88,12 +88,12 @@ app.put('/books/update/:id', (req, res) => {
   res.json({ message: 'Knyga atnaujinta' });
 });
 
-// [DELETE] - istrinti knyga
+// [DELETE] - ištrinti knygą
 app.delete('/books/delete/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const initialLength = books.length;
 
-  books = books.filter((b) => b.id !== bookId);
+  books = books.filter((book) => book.id !== bookId);
 
   if (books.length === initialLength) {
     return res.status(404).json({ error: 'Knyga nerasta' });
