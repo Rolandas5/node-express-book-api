@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/books';
+const API_URL = 'http://localhost:3000/api/books';
 
 // GET_Gauna visas knygas ir atvaizduoja
 async function getBooks() {
@@ -12,6 +12,7 @@ async function getBooks() {
     const card = document.createElement('div');
     card.className = 'book-card';
 
+    // HTML struktūrą su knygos informacija į kortelę
     card.innerHTML = `
       <img src="${book.image}" alt="${book.title}" />
       <h3>${book.title}</h3>
@@ -23,18 +24,19 @@ async function getBooks() {
   });
 }
 
-// POST_Pridėti naują knygą
+// POST_Pridėti naują knyga
 document.getElementById('create-btn').addEventListener('click', async () => {
   const title = document.getElementById('book-title').value;
   const author = document.getElementById('book-author').value;
   const image = document.getElementById('book-image').value;
 
+  // nieko nedarys, jei nebus įvestas bent vienas iš laukų
   if (!title || !author || !image) {
     alert('Užpildykite visus laukus');
     return;
   }
 
-  await fetch(`${API_URL}/create`, {
+  await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ title, author, image }),
@@ -43,19 +45,20 @@ document.getElementById('create-btn').addEventListener('click', async () => {
   getBooks();
 });
 
-// PUT_Atnaujinti knygą
+// PUT_Atnaujinti knyga
 document.getElementById('update-btn').addEventListener('click', async () => {
   const id = document.getElementById('book-id').value;
   const title = document.getElementById('book-title').value;
   const author = document.getElementById('book-author').value;
   const image = document.getElementById('book-image').value;
 
+  // Patikrinama ar įvesti visi laukai ir ID
   if (!id || !title || !author || !image) {
-    alert('Užpildykite visus laukus (įskaitant ID)');
+    alert('Užpildykite visus laukus ir įveskite ID');
     return;
   }
 
-  await fetch(`${API_URL}/update/${id}`, {
+  await fetch(`${API_URL}/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ title, author, image }),
@@ -68,12 +71,13 @@ document.getElementById('update-btn').addEventListener('click', async () => {
 document.getElementById('delete-btn').addEventListener('click', async () => {
   const id = document.getElementById('delete-id').value;
 
+  // Patikriname ar įvestas ID
   if (!id) {
     alert('Įveskite ID');
     return;
   }
 
-  await fetch(`${API_URL}/delete/${id}`, {
+  await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',
   });
 
@@ -94,6 +98,7 @@ document.getElementById('show-book-btn').addEventListener('click', async () => {
     return;
   }
 
+  // // Įrašo vienos knygos informaciją (paveikslėlį, pavadinimą, autorių) į div'ą #single-book
   singleBookDiv.innerHTML = `
             <img src="${book.image}" alt="${book.title}" style="max-width: 200px;" />
             <h3>${book.title}</h3>
@@ -105,5 +110,5 @@ document.getElementById('show-book-btn').addEventListener('click', async () => {
   });
 });
 
-// Iskvieciam pradini sąrasa
+// funkcija vėl gauna visą knygų sąrašą ir jį atvaizduoja naujai
 getBooks();
